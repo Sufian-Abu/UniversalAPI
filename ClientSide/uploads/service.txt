@@ -1,0 +1,63 @@
+<?php
+      if (isset($_POST['ack'])&&isset($_POST['sck'])&&isset($_POST['eucabucket']))
+      {
+      $accesskey=$_POST['ack'];
+      $secretkey=$_POST['sck'];
+      $bucket=$_POST['eucabucket'];
+      $url="http://localhost:8080/API/main/".$accesskey."/".$secretkey."/".$bucket;
+      $response = file_get_contents($url);
+      $response = new SimpleXMLElement($response);
+      $output=$response->create;
+      // echo $output;
+      // print_r($response);
+
+     echo"<div class='modal fade' id='output' role='dialog'>
+      <div class='modal-dialog'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+          <h4 class='modal-title'>Eucalyptus Output</h4>
+        </div>
+        <div class='modal-body'>
+          <p>$output</p>
+        </div>
+        <div class='modal-footer'>
+          <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+        </div>
+      </div>
+     </div>
+      </div>";
+
+      }
+
+      if (isset($_POST['identity'])&&isset($_POST['credential'])&&isset($_POST['openbucket']))
+      {
+       $identity=$_POST['identity'];
+       $credential=$_POST['credential'];
+       $bucket=$_POST['openbucket'];
+       $url="http://localhost:8080/API/main/openstack/".$identity."/".$credential."/".$bucket;
+      $response = file_get_contents($url);
+      $response = new SimpleXMLElement($response);
+      $output=$response->create;
+      // echo $output;
+      // print_r($response);
+
+     echo"<div class='modal fade' id='output' role='dialog'>
+      <div class='modal-dialog'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+          <h4 class='modal-title'>Openstack Output</h4>
+        </div>
+        <div class='modal-body'>
+          <p>$output</p>
+        </div>
+        <div class='modal-footer'>
+          <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+        </div>
+      </div>
+     </div>
+      </div>";
+
+      }
+?>
